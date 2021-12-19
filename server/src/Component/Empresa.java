@@ -10,11 +10,11 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import Server.SSSAbstract.SSSessionAbstract;
 
-public class Vivienda {
+public class Empresa {
 
-    public final static String tableName = "vivienda";
+    public final static String tableName = "empresa";
 
-    public Vivienda(JSONObject obj, SSSessionAbstract session) {
+    public Empresa(JSONObject obj, SSSessionAbstract session) {
         switch (obj.getString("type")) {
             case "getAll":
                 getAll(obj, session);
@@ -33,7 +33,7 @@ public class Vivienda {
 
     public void getAll(JSONObject obj, SSSessionAbstract session) {
         try {
-            String consulta =  "select get_all('"+tableName+"', 'key_condominio', '"+obj.getString("key_condominio")+"') as json";
+            String consulta =  "select get_all('"+tableName+"') as json";
             JSONObject data = SPGConect.ejecutarConsultaObject(consulta);
             obj.put("data", data);
             obj.put("estado", "exito");
