@@ -1,5 +1,5 @@
 {
-    "ss": "servisofts.facturacion",
+    "ss": "servisofts.empresa",
     "socket_client": {
         "servicio": {
             "puerto": 10001,
@@ -12,24 +12,24 @@
         "reconectTime": 5000
     },
     "files": {
-        "url": "/u01/servisoftsFiles/facturacion/"
+        "url": "/u01/servisoftsFiles/empresa/"
     },
     "data_base": {
         "puerto": 5432,
         "pass": "postgres",
-        "ip": "facturacion.ss.lo",
-        "bd_name": "servisofts.facturacion",
+        "ip": "empresa.ss.lo",
+        "bd_name": "servisofts.empresa",
         "user": "postgres"
     },
-    "nombre": "facturacion",
+    "nombre": "empresa",
     "ssl": {
         "pass_jks": "Servisofts123.",
         "cert": {
             "ST": "Av Banzer",
             "C": "BO",
             "E": "ricky.paz.d.97@gmail.com",
-            "OU": "facturacion",
-            "CN": "facturacion.servisofts.com",
+            "OU": "empresa",
+            "CN": "empresa.servisofts.com",
             "L": "Santa Cruz",
             "O": "Servisofts SRL"
         },
