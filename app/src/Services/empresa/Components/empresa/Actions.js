@@ -18,12 +18,8 @@ export default class Actions {
         return "";
     }
 
-    static getAll = (key_moneda, props) => {
+    static getAll = (key_servicio, props) => {
         var reducer = Actions._getReducer(props);
-        if (reducer.key_moneda != key_moneda) {
-            reducer.data = null;
-            reducer.key_moneda = key_moneda;
-        }
         var data = reducer.data;
         if (!data) {
             if (reducer.estado == "cargando") return null;
@@ -33,20 +29,22 @@ export default class Actions {
                 type: "getAll",
                 estado: "cargando",
                 key_usuario: props.state.usuarioReducer?.usuarioLog?.key,
-                key_moneda: key_moneda
+                // servicio: {
+                //     key: key_servicio
+                // }
             })
             return null;
         }
         return data;
     }
 
-    static getByKey = (key, key_moneda, props) => {
-        var data = Actions.getAll(key_moneda, props);
+    static getByKey = (key, key_servicio, props) => {
+        var data = Actions.getAll(key_servicio, props);
         if (!data) return null;
         return data[key];
     }
 
-    static registro = (data, key_moneda, props) => {
+    static registro = (data, key_servicio, props) => {
         SSocket.send({
             component: Parent.component,
             version: Parent.version,
@@ -54,10 +52,12 @@ export default class Actions {
             estado: "cargando",
             key_usuario: props.state.usuarioReducer?.usuarioLog?.key,
             data: data,
-            key_moneda: key_moneda
+            // servicio: {
+            //     key: key_servicio
+            // }
         })
     }
-    static editar = (data, key_moneda, props) => {
+    static editar = (data, key_servicio, props) => {
         SSocket.send({
             component: Parent.component,
             version: Parent.version,
@@ -65,10 +65,12 @@ export default class Actions {
             estado: "cargando",
             key_usuario: props.state.usuarioReducer?.usuarioLog?.key,
             data: data,
-            key_moneda: key_moneda
+            // servicio: {
+            //     key: key_servicio
+            // }
         })
     }
-    static eliminar = (data, key_moneda, props) => {
+    static eliminar = (data, key_servicio, props) => {
         SSocket.send({
             component: Parent.component,
             version: Parent.version,
@@ -79,7 +81,9 @@ export default class Actions {
                 ...data,
                 estado: 0,
             },
-            key_moneda: key_moneda
+            // servicio: {
+            //     key: key_servicio
+            // }
         })
     }
 }

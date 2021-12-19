@@ -7,12 +7,12 @@ export default class Actions {
         var data = reducer.data;
         if (!data) {
             if (reducer.estado == "cargando") return null;
-
+            // console.log();
             SSocket.sendHttp(SSocket.api.servicio+"api", {
                 component: "servicio",
                 type: "getAllHabilitados",
                 estado: "cargando",
-                key_servicio: "2b32d417-97ea-4038-9622-5c1ba2f35790",
+                key_servicio: "1d78f061-4946-4b3a-954e-2a05004bbf89",
             })
             return null;
         }
