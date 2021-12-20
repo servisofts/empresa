@@ -34,7 +34,8 @@ const App = (props) => {
                 theme={{ initialTheme: "dark", themes: SConfig.SThemeProps }}>
                 <SNavigation props={{
                     prefixes: ["https://component.servisofts.com", "component.servisofts://"],
-                    pages: Pages
+                    pages: Pages,
+                    title:"SS Empresa"
                 }} />
                 <SSocket identificarse={(props) => {
                     var usuario = null

@@ -65,7 +65,7 @@ class InicioPage extends Component {
         var camisa = require("./Images/camisa.jpg");
         return (
             <SPage
-                title="Inicio"
+                title="Empresa"
             >
                 <SView col={"xs-12"} row center >
                         {/* {this.getPaginas()} */}

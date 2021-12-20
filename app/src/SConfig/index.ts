@@ -7,7 +7,7 @@ const SThemeProps: SThemeThemes = {
         text: "#000000",
         primary: "#eeeeee",
         secondary: "#000000",
-        background: "#eeeeee",
+        background: "#f0f0f0",
         card: "#CCC6C666"
     },
     dark: {
@@ -23,6 +23,7 @@ const SThemeProps: SThemeThemes = {
 
 const SocketProps: SSocketProps = {
     name: 'empresa',
+    // host: 'empresa.ss.lo',
     host: '192.168.0.199',
     port: {
         native: 10029,
