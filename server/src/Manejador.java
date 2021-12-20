@@ -1,5 +1,5 @@
 import org.json.JSONObject;
-import Component.Empresa;
+import Component.*;
 import Server.SSSAbstract.SSSessionAbstract;
 import Servisofts.SConsole;
 
@@ -12,9 +12,9 @@ public class Manejador {
             return;
         }
         switch (obj.getString("component")) {
-            case Empresa.tableName:
-                new Empresa(obj, session);
-            break;
+            case Empresa.tableName: new Empresa(obj, session); break;
+            case Sucursal.tableName: new Sucursal(obj, session); break;
+            case PuntoVenta.tableName: new PuntoVenta(obj, session); break;
         }
     }
 }
