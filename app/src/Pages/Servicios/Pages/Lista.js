@@ -76,7 +76,7 @@ class Lista extends Component {
 
     render() {
         return (
-            <SPage title={'Servicios habilitados para contabilidad'} disableScroll>
+            <SPage title={'Servicios habilitados'} disableScroll>
                 <SView col={"xs-12"} center height>
                     {this.getLista()}
                 </SView>

@@ -72,7 +72,8 @@ class InicioPage extends Component {
                 </SView>
 
                 <BotonesPaginas data={[
-                    { label: "Servicios", url: "servicios", icon: "Servisofts" },
+                    // { label: "Servicios", url: "servicios", icon: "Servisofts" },
+                    { label: "Empresas", url: "empresa", icon: "Servisofts" },
                 ]} />
             </SPage>
         );
