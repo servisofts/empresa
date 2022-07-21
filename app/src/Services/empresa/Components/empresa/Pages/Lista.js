@@ -9,11 +9,10 @@ class Lista extends Component {
         super(props);
         this.state = {
         };
-        this.key_servicio = SNavigation.getParam("key_servicio");
     }
 
     getContent() {
-        var data = Parent.Actions.getAll(this.key_servicio, this.props);
+        var data = Parent.Actions.getAll(this.props);
         if (!data) return <SLoad />;
         return <STable2
             header={[
@@ -28,6 +27,7 @@ class Lista extends Component {
                 },
                 { key: "nit", label: "Nit", width: 150 },
                 { key: "razon_social", label: "Razon social", width: 150 },
+                { key: "key_servicio", label: "key_servicio", width: 150 },
                 { key: "key-editar", label: "Editar", width: 100, center: true, component: (item) => { return <SView onPress={() => { SNavigation.navigate(Parent.component + "/registro", { key: item }) }}> <SIcon name={"Edit"} width={35} /></SView> } },
                 { key: "key-eliminar", label: "Eliminar", width: 100, center: true, component: (key) => { return <SView width={35} height={35} onPress={() => { SPopup.confirm({ title: "Eliminar", message: "¿Esta seguro de eliminar?", onPress: () => { Parent.Actions.eliminar(data[key], this.key_servicio, this.props) } }) }}> <SIcon name={'Delete'} /> </SView> } },
                 { key: "key-sucursal", label: "Sucursal", width: 100, center: true, component: (key) => { return <SView width={35} height={35} onPress={() => { SNavigation.navigate("sucursal", { key_empresa: key }) }}> <SIcon name={'Ajustes'} /> </SView> } },

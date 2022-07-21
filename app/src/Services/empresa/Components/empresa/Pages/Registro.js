@@ -8,13 +8,13 @@ class Registro extends Component {
         super(props);
         this.state = {
         };
-        this.key_servicio = SNavigation.getParam("key_servicio");
+        // this.key_servicio = SNavigation.getParam("key_servicio");
         this.key = SNavigation.getParam("key");
     }
     getContent() {
         this.data = {};
         if (this.key) {
-            this.data = Parent.Actions.getByKey(this.key, this.key_servicio, this.props);
+            this.data = Parent.Actions.getByKey(this.key, this.props);
             if (!this.data) return <SLoad />
         }
         return <SForm
@@ -27,6 +27,7 @@ class Registro extends Component {
                 foto_p: { type: "image", isRequired: false, defaultValue: `${SSocket.api.root}${Parent.component}/${this.key}` },
                 nit: { label: "nit", isRequired: true, defaultValue: this.data["nit"] },
                 razon_social: { label: "Razon social", isRequired: true, defaultValue: this.data["razon_social"] },
+                key_servicio: { label: "key_servicio", defaultValue: this.data["key_servicio"] },
             }}
             onSubmit={(values) => {
                 if (this.key) {

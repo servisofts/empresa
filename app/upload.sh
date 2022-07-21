@@ -1,1 +1,1 @@
-rsync -rv ./build 199:/u01/docker/empresa/entornos/empresa/
+scp -r build 10:/home/servisofts/servicios/empresa/entornos/empresa/
