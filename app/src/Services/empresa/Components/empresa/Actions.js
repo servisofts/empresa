@@ -18,7 +18,7 @@ export default class Actions {
         return "";
     }
 
-    static getAll = (key_servicio, props) => {
+    static getAll = (props) => {
         var reducer = Actions._getReducer(props);
         var data = reducer.data;
         if (!data) {
@@ -29,17 +29,15 @@ export default class Actions {
                 type: "getAll",
                 estado: "cargando",
                 key_usuario: props.state.usuarioReducer?.usuarioLog?.key,
-                // servicio: {
-                //     key: key_servicio
-                // }
+
             })
             return null;
         }
         return data;
     }
 
-    static getByKey = (key, key_servicio, props) => {
-        var data = Actions.getAll(key_servicio, props);
+    static getByKey = (key, props) => {
+        var data = Actions.getAll(props);
         if (!data) return null;
         return data[key];
     }
