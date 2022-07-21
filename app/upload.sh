@@ -1,0 +1,1 @@
+rsync -rv ./build 199:/u01/docker/empresa/entornos/empresa/

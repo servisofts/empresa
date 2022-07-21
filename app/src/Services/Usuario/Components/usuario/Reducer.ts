@@ -18,6 +18,7 @@ const initialState = () => {
     }
     SStorage.getItem("usr_log", (resp: any) => {
         initialState.usuarioLog = JSON.parse(resp);
+        if (!initialState.usuarioLog) initialState.usuarioLog = { key: "void" }; //this line is temporary
     })
     return initialState;
 }

@@ -28,7 +28,7 @@ class Lista extends Component {
                 },
                 { key: "descripcion", label: "descripcion", width: 150 },
                 { key: "observacion", label: "Observacion", width: 150 },
-                { key: "codigo_impuestos", label: "C. Impuestos", width: 150 },
+                // { key: "codigo_impuestos", label: "C. Impuestos", width: 150 },
                 { key: "direccion", label: "Direccion", width: 150 },
                 { key: "key-editar", label: "Editar", width: 100, center: true, component: (item) => { return <SView onPress={() => { SNavigation.navigate(Parent.component + "/registro", { key: item }) }}> <SIcon name={"Edit"} width={35} /></SView> } },
                 { key: "key-eliminar", label: "Eliminar", width: 100, center: true, component: (key) => { return <SView width={35} height={35} onPress={() => { SPopup.confirm({ title: "Eliminar", message: "¿Esta seguro de eliminar?", onPress: () => { Parent.Actions.eliminar(data[key], this.key_sucursal, this.props) } }) }}> <SIcon name={'Delete'} /> </SView> } },

@@ -30,7 +30,7 @@ class Lista extends Component {
                 { key: "observacion", label: "Observacion", width: 150 },
                 // { key: "codigo_impuestos", label: "C. Impuestos", width: 150 },
                 { key: "direccion", label: "Direccion", width: 150 },
-                { key: "key-editar", label: "Editar", width: 100, center: true, component: (item) => { return <SView onPress={() => { SNavigation.navigate(Parent.component + "/registro", { key: item }) }}> <SIcon name={"Edit"} width={35} /></SView> } },
+                { key: "key-editar", label: "Editar", width: 100, center: true, component: (item) => { return <SView onPress={() => { SNavigation.navigate(Parent.component + "/registro", { key: item, key_empresa:this.key_empresa }) }}> <SIcon name={"Edit"} width={35} /></SView> } },
                 { key: "key-eliminar", label: "Eliminar", width: 100, center: true, component: (key) => { return <SView width={35} height={35} onPress={() => { SPopup.confirm({ title: "Eliminar", message: "¿Esta seguro de eliminar?", onPress: () => { Parent.Actions.eliminar(data[key], this.key_empresa, this.props) } }) }}> <SIcon name={'Delete'} /> </SView> } },
                 { key: "key-pv", label: "Punto de venta", width: 100, center: true, component: (key) => { return <SView width={35} height={35} onPress={() => { SNavigation.navigate("punto_venta", { key_sucursal: key, key_empresa: this.key_empresa }) }}> <SIcon name={'Caja'} /> </SView> } },
                 // { key: "key-moneda", label: "Moneda", width: 100, center: true, component: (key) => { return <SView width={35} height={35} onPress={() => { SNavigation.navigate("moneda", { key_empresa: key }) }}> <SIcon name={'Money'} /> </SView> } },
