@@ -3,7 +3,7 @@
     "socket_client": {
         "servicio": {
             "puerto": 10001,
-            "ip": "servicio.ss.lo",
+            "ip": "192.168.5.1",
             "cert": {
                 "OU": "servicio",
                 "pem": "servicio.pem"
@@ -12,12 +12,12 @@
         "reconectTime": 5000
     },
     "files": {
-        "url": "/u01/servisoftsFiles/empresa/"
+        "url": "/home/ruddy/servisoftsFiles/empresa/"
     },
     "data_base": {
         "puerto": 5432,
         "pass": "postgres",
-        "ip": "empresa.ss.lo",
+        "ip": "192.168.5.29",
         "bd_name": "servisofts.empresa",
         "user": "postgres"
     },

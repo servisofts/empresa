@@ -34,6 +34,10 @@ public class Empresa {
     public void getAll(JSONObject obj, SSSessionAbstract session) {
         try {
             String consulta =  "select get_all('"+tableName+"') as json";
+            if(obj.has("servicio")){
+                consulta =  "select get_all('"+tableName+"', 'key_servicio', '"+obj.getJSONObject("servicio").getString("key")+"') as json";
+            }
+
             JSONObject data = SPGConect.ejecutarConsultaObject(consulta);
             obj.put("data", data);
             obj.put("estado", "exito");
