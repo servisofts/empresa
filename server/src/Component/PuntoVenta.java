@@ -64,7 +64,6 @@ public class PuntoVenta {
             data.put("fecha_on",fecha_on);
             data.put("estado",1);
             SPGConect.insertArray(tableName, new JSONArray().put(data));
-            SPGConect.historico(obj.getString("key_usuario"), tableName+"_registro", data);
             obj.put("data", data);
             obj.put("estado", "exito");
         } catch (SQLException e) {
@@ -77,7 +76,6 @@ public class PuntoVenta {
         try {
             JSONObject data = obj.getJSONObject("data");
             SPGConect.editObject(tableName, data);
-            SPGConect.historico(obj.getString("key_usuario"), tableName+"_editar", data);
             obj.put("data", data);
             obj.put("estado", "exito");
         } catch (SQLException e) {
