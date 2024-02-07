@@ -1,0 +1,57 @@
+
+POST http://192.168.0.199:30038/api
+content-type: application/json
+
+{
+    "component": "algo",
+    "type": "getAll"
+}
+
+### empresas
+
+POST http://192.168.0.199:30038/api
+content-type: application/json
+
+{
+    "service": "empresa",
+    "component": "empresa",
+    "type": "getAll"
+}
+
+### sucurasles 
+
+POST http://192.168.0.199:30038/api
+content-type: application/json
+
+{
+    "service": "empresa",
+    "component": "sucursal",
+    "type": "getAll",
+    "key_empresa": "74ac7008-5a7f-49da-9b0c-9a9961e4327e"
+}
+
+### usuarios 
+
+POST http://192.168.0.199:30038/api
+content-type: application/json
+
+{
+    "service": "usuario",
+    "version": "2.0",
+    "component": "usuario",
+    "type": "getAll",
+    "cabecera": "usuario_app",
+    "key_usuario": "",
+}
+
+### rol
+
+POST http://192.168.0.199:30038/api
+content-type: application/json
+
+{
+    "service": "roles_permisos",
+    "component": "rol",
+    "type": "getAll"
+}
+

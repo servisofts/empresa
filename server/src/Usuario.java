@@ -174,7 +174,7 @@ public class Usuario {
             String key_usuario = obj.getString("key_usuario_modificado");
             // SSServerAbstract.sendServer(SSServerAbstract.TIPO_SOCKET_WEB,
             // objNotificacion.toString());
-            SSServerAbstract.sendUsers(obj.toString(), new JSONArray().put(key_usuario));
+            SSServerAbstract.sendUsers(obj, new JSONArray().put(key_usuario));
             // System.out.println(obj.toString());
         }
 
