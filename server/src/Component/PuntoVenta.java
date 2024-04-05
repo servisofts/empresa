@@ -22,12 +22,27 @@ public class PuntoVenta {
             case "getByKey":
                 getByKey(obj, session);
             break;
+            case "getByCode":
+                getByCode(obj, session);
+            break;
             case "registro":
                 registro(obj, session);
             break;
             case "editar":
                 editar(obj, session);
             break;
+        }
+    }
+
+    public void getByCode(JSONObject obj, SSSessionAbstract session) {
+        try {
+            String consulta =  "select get_punto_venta('"+obj.getString("codigo")+"','"+obj.getString("key_sucursal")+"') as json";
+            JSONObject data = SPGConect.ejecutarConsultaObject(consulta);
+            obj.put("data", data);
+            obj.put("estado", "exito");
+        } catch (SQLException e) {
+            obj.put("estado", "error");
+            e.printStackTrace();
         }
     }
 

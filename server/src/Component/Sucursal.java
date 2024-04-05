@@ -25,6 +25,9 @@ public class Sucursal {
             case "registro":
                 registro(obj, session);
             break;
+            case "getByCode":
+                getByCode(obj, session);
+            break;
             case "editar":
                 editar(obj, session);
             break;
@@ -34,6 +37,18 @@ public class Sucursal {
     public void getAll(JSONObject obj, SSSessionAbstract session) {
         try {
             String consulta =  "select get_all('"+tableName+"', 'key_empresa', '"+obj.getString("key_empresa")+"') as json";
+            JSONObject data = SPGConect.ejecutarConsultaObject(consulta);
+            obj.put("data", data);
+            obj.put("estado", "exito");
+        } catch (SQLException e) {
+            obj.put("estado", "error");
+            e.printStackTrace();
+        }
+    }
+    
+    public void getByCode(JSONObject obj, SSSessionAbstract session) {
+        try {
+            String consulta =  "select get_sucursal('"+obj.getString("codigo")+"','"+obj.getString("key_empresa")+"') as json";
             JSONObject data = SPGConect.ejecutarConsultaObject(consulta);
             obj.put("data", data);
             obj.put("estado", "exito");

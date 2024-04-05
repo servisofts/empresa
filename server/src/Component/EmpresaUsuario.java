@@ -5,6 +5,8 @@ import java.util.UUID;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import Servisofts.SPGConect;
+import Servisofts.SUtil;
+
 import java.text.DateFormat;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -21,6 +23,9 @@ public class EmpresaUsuario {
             break;
             case "getByKey":
                 getByKey(obj, session);
+            break;
+            case "getByKeys":
+                getByKeys(obj, session);
             break;
             case "registro":
                 registro(obj, session);
@@ -62,19 +67,47 @@ public class EmpresaUsuario {
             e.printStackTrace();
         }
     }
+    public void getByKeys(JSONObject obj, SSSessionAbstract session) {
+        try {
+            String consulta =  "select get_all('"+tableName+"','key_empresa','"+obj.getString("key_empresa")+"', 'key_usuario', '"+obj.getString("key_usuario")+"') as json";
+            JSONObject data = SPGConect.ejecutarConsultaObject(consulta);
+            obj.put("data", data);
+            obj.put("estado", "exito");
+        } catch (SQLException e) {
+            obj.put("estado", "error");
+            e.printStackTrace();
+        }
+    }
+
+    public static JSONObject getByKeys(String key_empresa, String key_usuario) {
+        try {
+            String consulta =  "select get_all('"+tableName+"','key_empresa','"+key_empresa+"', 'key_usuario', '"+key_usuario+"') as json";
+            JSONObject data = SPGConect.ejecutarConsultaObject(consulta);
+            data = data.getJSONObject(JSONObject.getNames(data)[0]);
+            return data;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     public void registro(JSONObject obj, SSSessionAbstract session) {
         try {
-            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS");
-            String fecha_on = formatter.format(new Date());
             JSONObject data = obj.getJSONObject("data");
+
+            JSONObject empresaUsuario = EmpresaUsuario.getByKeys(data.getString("key_empresa"), data.getString("key_usuario"));
+
+            if(empresaUsuario!=null){
+                throw new Exception("Ya existe en la empresa");
+            }
+
             data.put("key",UUID.randomUUID().toString());
-            data.put("fecha_on",fecha_on);
+            data.put("fecha_on",SUtil.now());
             data.put("estado",1);
             SPGConect.insertArray(tableName, new JSONArray().put(data));
             obj.put("data", data);
             obj.put("estado", "exito");
-        } catch (SQLException e) {
+        } catch (Exception e) {
             obj.put("estado", "error");
             e.printStackTrace();
         }
@@ -84,7 +117,6 @@ public class EmpresaUsuario {
         try {
             JSONObject data = obj.getJSONObject("data");
             SPGConect.editObject(tableName, data);
-            SPGConect.historico(obj.getString("key_usuario"), tableName+"_editar", data);
             obj.put("data", data);
             obj.put("estado", "exito");
         } catch (SQLException e) {
