@@ -83,8 +83,10 @@ public class EmpresaUsuario {
         try {
             String consulta =  "select get_all('"+tableName+"','key_empresa','"+key_empresa+"', 'key_usuario', '"+key_usuario+"') as json";
             JSONObject data = SPGConect.ejecutarConsultaObject(consulta);
-            data = data.getJSONObject(JSONObject.getNames(data)[0]);
-            return data;
+            if(JSONObject.getNames(data) != null){
+                return data.getJSONObject(JSONObject.getNames(data)[0]);
+            }
+            return null;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

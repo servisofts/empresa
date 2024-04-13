@@ -19,6 +19,9 @@ public class Empresa {
             case "getAll":
                 getAll(obj, session);
             break;
+            case "getAll_":
+                getAll_(obj, session);
+            break;
             case "getByKey":
                 getByKey(obj, session);
             break;
@@ -28,6 +31,19 @@ public class Empresa {
             case "editar":
                 editar(obj, session);
             break;
+        }
+    }
+
+    public void getAll_(JSONObject obj, SSSessionAbstract session) {
+        try {
+            String consulta =  "select get_all('"+tableName+"', 'key_servicio', '"+obj.getString("key_servicio")+"') as json";
+
+            JSONObject data = SPGConect.ejecutarConsultaObject(consulta);
+            obj.put("data", data);
+            obj.put("estado", "exito");
+        } catch (SQLException e) {
+            obj.put("estado", "error");
+            e.printStackTrace();
         }
     }
 
