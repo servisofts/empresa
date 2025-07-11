@@ -1,7 +1,6 @@
 package Component;
 
-import java.util.Date;
-import java.util.UUID;
+ import java.util.UUID;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import Servisofts.SPGConect;
@@ -38,11 +37,11 @@ public class EmpresaMonedaDetalle {
             if(obj.has("key_empresa")){
                 consulta = "select get_moneda_detalle('"+obj.getString("key_empresa")+"') as json";
             }
-            
+
             if(obj.has("key_empresa_moneda")){
                 consulta =  "select get_all('"+tableName+"', 'key_empresa_moneda', '"+obj.getString("key_empresa_moneda")+"') as json";
             }
-            
+
 
             JSONObject data = SPGConect.ejecutarConsultaObject(consulta);
             obj.put("data", data);

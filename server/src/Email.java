@@ -13,7 +13,7 @@ import org.json.JSONObject;
 
 public class Email extends Thread {
 
-    
+
     private String host;
     private String port;
     private String user;
@@ -89,7 +89,6 @@ public class Email extends Thread {
             // cuerpo = cuerpo.replaceAll("usuarioServisofts", data.getString("correo"));
             // cuerpo = cuerpo.replaceAll("passServisofts", data.getString("pass"));
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 

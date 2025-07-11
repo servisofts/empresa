@@ -18,25 +18,29 @@ public class Empresa {
         switch (obj.getString("type")) {
             case "getAll":
                 getAll(obj, session);
-            break;
+                break;
             case "getAll_":
                 getAll_(obj, session);
-            break;
+                break;
             case "getByKey":
                 getByKey(obj, session);
-            break;
+                break;
+            case "getByKeyFull":
+                getByKeyFull(obj, session);
+                break;
             case "registro":
                 registro(obj, session);
-            break;
+                break;
             case "editar":
                 editar(obj, session);
-            break;
+                break;
         }
     }
 
     public void getAll_(JSONObject obj, SSSessionAbstract session) {
         try {
-            String consulta =  "select get_all('"+tableName+"', 'key_servicio', '"+obj.getString("key_servicio")+"') as json";
+            String consulta = "select get_all('" + tableName + "', 'key_servicio', '" + obj.getString("key_servicio")
+                    + "') as json";
 
             JSONObject data = SPGConect.ejecutarConsultaObject(consulta);
             obj.put("data", data);
@@ -49,9 +53,10 @@ public class Empresa {
 
     public void getAll(JSONObject obj, SSSessionAbstract session) {
         try {
-            String consulta =  "select get_all('"+tableName+"') as json";
-            if(obj.has("servicio")){
-                consulta =  "select get_all('"+tableName+"', 'key_servicio', '"+obj.getJSONObject("servicio").getString("key")+"') as json";
+            String consulta = "select get_all('" + tableName + "') as json";
+            if (obj.has("servicio")) {
+                consulta = "select get_all('" + tableName + "', 'key_servicio', '"
+                        + obj.getJSONObject("servicio").getString("key") + "') as json";
             }
 
             JSONObject data = SPGConect.ejecutarConsultaObject(consulta);
@@ -65,7 +70,19 @@ public class Empresa {
 
     public void getByKey(JSONObject obj, SSSessionAbstract session) {
         try {
-            String consulta =  "select get_by_key('"+tableName+"','"+obj.getString("key")+"') as json";
+            String consulta = "select get_by_key('" + tableName + "','" + obj.getString("key") + "') as json";
+            JSONObject data = SPGConect.ejecutarConsultaObject(consulta);
+            obj.put("data", data);
+            obj.put("estado", "exito");
+        } catch (SQLException e) {
+            obj.put("estado", "error");
+            e.printStackTrace();
+        }
+    }
+
+    public void getByKeyFull(JSONObject obj, SSSessionAbstract session) {
+        try {
+            String consulta = "select empresa_by_key_full_detail('" + obj.getString("key") + "') as json";
             JSONObject data = SPGConect.ejecutarConsultaObject(consulta);
             obj.put("data", data);
             obj.put("estado", "exito");
@@ -80,11 +97,11 @@ public class Empresa {
             DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS");
             String fecha_on = formatter.format(new Date());
             JSONObject data = obj.getJSONObject("data");
-            data.put("key",UUID.randomUUID().toString());
-            data.put("fecha_on",fecha_on);
-            data.put("estado",1);
+            data.put("key", UUID.randomUUID().toString());
+            data.put("fecha_on", fecha_on);
+            data.put("estado", 1);
             SPGConect.insertArray(tableName, new JSONArray().put(data));
-            SPGConect.historico(obj.getString("key_usuario"), tableName+"_registro", data);
+            SPGConect.historico(obj.getString("key_usuario"), tableName + "_registro", data);
             obj.put("data", data);
             obj.put("estado", "exito");
         } catch (SQLException e) {
@@ -97,7 +114,7 @@ public class Empresa {
         try {
             JSONObject data = obj.getJSONObject("data");
             SPGConect.editObject(tableName, data);
-            SPGConect.historico(obj.getString("key_usuario"), tableName+"_editar", data);
+            SPGConect.historico(obj.getString("key_usuario"), tableName + "_editar", data);
             obj.put("data", data);
             obj.put("estado", "exito");
         } catch (SQLException e) {

@@ -22,6 +22,9 @@ public class Sucursal {
             case "getByKey":
                 getByKey(obj, session);
             break;
+            case "getByKeyEmpresa":
+                getByKeyEmpresa(obj, session);
+            break;
             case "registro":
                 registro(obj, session);
             break;
@@ -62,6 +65,18 @@ public class Sucursal {
         try {
             String consulta =  "select get_by_key('"+tableName+"','"+obj.getString("key")+"') as json";
             JSONObject data = SPGConect.ejecutarConsultaObject(consulta);
+            obj.put("data", data);
+            obj.put("estado", "exito");
+        } catch (SQLException e) {
+            obj.put("estado", "error");
+            e.printStackTrace();
+        }
+    }
+
+    public void getByKeyEmpresa(JSONObject obj, SSSessionAbstract session) {
+        try {
+            String consulta =  "select get_sucursales('"+obj.getString("key_empresa")+"') as json";
+            JSONArray data = SPGConect.ejecutarConsultaArray(consulta);
             obj.put("data", data);
             obj.put("estado", "exito");
         } catch (SQLException e) {

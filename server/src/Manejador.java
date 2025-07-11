@@ -18,8 +18,12 @@ public class Manejador {
             case EmpresaMoneda.tableName: new EmpresaMoneda(obj, session); break;
             case EmpresaMonedaDetalle.tableName: new EmpresaMonedaDetalle(obj, session); break;
             case EmpresaUsuario.tableName: new EmpresaUsuario(obj, session); break;
+            case EmpresaUsuarioLog.tableName: new EmpresaUsuarioLog(obj, session); break;
             case TipoPago.tableName: new TipoPago(obj, session); break;
             case PuntoVentaTipoPago.tableName: new PuntoVentaTipoPago(obj, session); break;
+            case Turno.tableName: new Turno(obj, session); break;
+            case HorarioAtencion.tableName: new HorarioAtencion(obj, session); break;
+
         }
     }
 }

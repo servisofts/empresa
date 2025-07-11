@@ -1,7 +1,6 @@
 package Component;
 
-import java.util.Date;
-import java.util.UUID;
+ import java.util.UUID;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import Servisofts.SPGConect;
@@ -89,7 +88,7 @@ public class EmpresaMoneda {
             actual.put("key_moneda", data.getString("key"));
             actual.put("key", SUtil.uuid());
             SPGConect.insertArray("empresa_moneda_historico", new JSONArray().put(actual));
-        
+
             data.put("fecha_on", SUtil.now());
             SPGConect.editObject(tableName, data);
             obj.put("data", data);
