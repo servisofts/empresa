@@ -1,6 +1,6 @@
 package Component;
 
- import java.util.UUID;
+import java.util.UUID;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import Servisofts.SPGConect;
@@ -17,22 +17,26 @@ public class EmpresaMoneda {
         switch (obj.getString("type")) {
             case "getAll":
                 getAll(obj, session);
-            break;
+                break;
             case "getByKey":
                 getByKey(obj, session);
-            break;
+                break;
             case "registro":
                 registro(obj, session);
-            break;
+                break;
             case "editar":
                 editar(obj, session);
-            break;
+                break;
+            case "getByKeyHistorialMoneda":
+                getByKeyHistorialMoneda(obj, session);
+                break;
         }
     }
 
     public void getAll(JSONObject obj, SSSessionAbstract session) {
         try {
-            String consulta =  "select get_all('"+tableName+"', 'key_empresa', '"+obj.getString("key_empresa")+"') as json";
+            String consulta = "select get_all('" + tableName + "', 'key_empresa', '" + obj.getString("key_empresa")
+                    + "') as json";
             JSONObject data = SPGConect.ejecutarConsultaObject(consulta);
             obj.put("data", data);
             obj.put("estado", "exito");
@@ -44,7 +48,7 @@ public class EmpresaMoneda {
 
     public void getByKey(JSONObject obj, SSSessionAbstract session) {
         try {
-            String consulta =  "select get_by_key('"+tableName+"','"+obj.getString("key")+"') as json";
+            String consulta = "select get_by_key('" + tableName + "','" + obj.getString("key") + "') as json";
             JSONObject data = SPGConect.ejecutarConsultaObject(consulta);
             obj.put("data", data);
             obj.put("estado", "exito");
@@ -56,7 +60,7 @@ public class EmpresaMoneda {
 
     public JSONObject getByKey(String key) {
         try {
-            String consulta =  "select get_by_key('"+tableName+"','"+key+"') as json";
+            String consulta = "select get_by_key('" + tableName + "','" + key + "') as json";
             return SPGConect.ejecutarConsultaObject(consulta);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -67,9 +71,9 @@ public class EmpresaMoneda {
     public void registro(JSONObject obj, SSSessionAbstract session) {
         try {
             JSONObject data = obj.getJSONObject("data");
-            data.put("key",UUID.randomUUID().toString());
-            data.put("fecha_on",SUtil.now());
-            data.put("estado",1);
+            data.put("key", UUID.randomUUID().toString());
+            data.put("fecha_on", SUtil.now());
+            data.put("estado", 1);
             SPGConect.insertArray(tableName, new JSONArray().put(data));
 
             obj.put("data", data);
@@ -85,7 +89,13 @@ public class EmpresaMoneda {
             JSONObject data = obj.getJSONObject("data");
 
             JSONObject actual = getByKey(data.getString("key"));
-            actual.put("key_moneda", data.getString("key"));
+
+            if (actual.isNull("key")) {
+                obj.put("estado", "error");
+                obj.put("error", "No existe el registro");
+                return;
+            }
+            actual.put("key_empresa_moneda", data.getString("key"));
             actual.put("key", SUtil.uuid());
             SPGConect.insertArray("empresa_moneda_historico", new JSONArray().put(actual));
 
@@ -96,6 +106,18 @@ public class EmpresaMoneda {
         } catch (SQLException e) {
             obj.put("estado", "error");
             obj.put("error", e.getLocalizedMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void getByKeyHistorialMoneda(JSONObject obj, SSSessionAbstract session) {
+        try {
+            String consulta = "select get_all('empresa_moneda_historico','key_empresa_moneda','" + obj.getString("key") + "') as json";
+            JSONObject data = SPGConect.ejecutarConsultaObject(consulta);
+            obj.put("data", data);
+            obj.put("estado", "exito");
+        } catch (SQLException e) {
+            obj.put("estado", "error");
             e.printStackTrace();
         }
     }
