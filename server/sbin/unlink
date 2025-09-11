@@ -1,0 +1,6 @@
+#!/bin/bash
+. config.env
+
+rm -fr "$ROUTE_TO/lib/lib"
+rm -fr "$ROUTE_TO/src/Servisofts"
+

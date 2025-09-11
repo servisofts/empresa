@@ -8,7 +8,7 @@ import Servisofts.SPGConect;
 import java.text.DateFormat;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import Server.SSSAbstract.SSSessionAbstract;
+import Servisofts.Server.SSSAbstract.SSSessionAbstract;
 
 public class Empresa {
 

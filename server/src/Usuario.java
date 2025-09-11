@@ -2,9 +2,9 @@
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import Server.SSSAbstract.SSServerAbstract;
-import Server.SSSAbstract.SSSessionAbstract;
-import SocketCliente.SocketCliente;
+import Servisofts.Server.SSSAbstract.SSServerAbstract;
+import Servisofts.Server.SSSAbstract.SSSessionAbstract;
+import Servisofts.SocketCliente.SocketCliente;
 
 public class Usuario {
 
