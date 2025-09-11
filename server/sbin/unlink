@@ -2,8 +2,5 @@
 . config.env
 
 rm -fr "$ROUTE_TO/lib/lib"
-rm -fr "$ROUTE_TO/src/_component"
-rm -fr "$ROUTE_TO/src/Server"
-rm -fr "$ROUTE_TO/src/ServerHttp" "$ROUTE_TO/src/ServerHttp"
 rm -fr "$ROUTE_TO/src/Servisofts"
-rm -fr "$ROUTE_TO/src/SocketCliente"
+

@@ -7,7 +7,7 @@ import Servisofts.SPGConect;
 import Servisofts.SUtil;
 
 import java.sql.SQLException;
-import Server.SSSAbstract.SSSessionAbstract;
+import Servisofts.Server.SSSAbstract.SSSessionAbstract;
 
 public class TipoPago {
 

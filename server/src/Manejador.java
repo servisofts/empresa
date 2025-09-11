@@ -1,6 +1,6 @@
 import org.json.JSONObject;
 import Component.*;
-import Server.SSSAbstract.SSSessionAbstract;
+import Servisofts.Server.SSSAbstract.SSSessionAbstract;
 import Servisofts.SConsole;
 
 public class Manejador {
